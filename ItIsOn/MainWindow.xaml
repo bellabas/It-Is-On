@@ -4,9 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ItIsOn"
+        xmlns:vms="clr-namespace:ItIsOn.ViewModel"
         mc:Ignorable="d"
-        Title="It is ON" Height="450" Width="800">
-    <Grid>
-
+        Title="It is ON App" Height="450" Width="800">
+    <Window.DataContext>
+        <vms:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="GhostWhite" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" x:Name="MainMenu" HorizontalAlignment="Center" Visibility="Visible">
+            <Label Content="It is OFF!" HorizontalAlignment="Center" FontSize="25" Foreground="Tomato" FontWeight="Heavy"/>
+            <Label Content="modes:" FontSize="18"/>
+            <Button Content="prevent SCREENSAVER and SLEEP"/>
+            <Button Content="prevent SLEEP"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" x:Name="ModeSelectedMenu" HorizontalAlignment="Center" Visibility="Hidden">
+            <Label Content="It is ON!" HorizontalAlignment="Center" FontSize="25" Foreground="LightGreen" FontWeight="Heavy"/>
+            <Label Content="selected mode:"  FontSize="18"/>
+            <Label Content="" />
+            <Button Content="&lt; Back"/>
+        </StackPanel>
     </Grid>
 </Window>
