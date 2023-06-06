@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ItIsOn.Logic;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.DependencyInjection;
+using Microsoft.Toolkit.Mvvm.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +17,14 @@ namespace ItIsOn
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Ioc.Default.ConfigureServices(
+                new ServiceCollection()
+                    .AddSingleton<IThreadExecutionStateLogic, ThreadExecutionStateLogic>()
+                    .AddSingleton<IMessenger>(WeakReferenceMessenger.Default)
+                    .BuildServiceProvider()
+                );
+        }
     }
 }
