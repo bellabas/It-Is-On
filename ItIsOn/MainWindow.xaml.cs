@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItIsOn.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,32 @@ namespace ItIsOn
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ScreensaverAndSleep_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainWindowViewModel).PreventScreensaverAndSleepCommand.Execute(null);
+            SetTitleLabel();
+        }
+
+        private void Sleep_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainWindowViewModel).PreventSleepCommand.Execute(null);
+            SetTitleLabel();
+        }
+
+        private void NormalMode_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as MainWindowViewModel).SetNormalModeCommand.Execute(null);
+            SetTitleLabel();
+        }
+
+        private void SetTitleLabel()
+        {
+            if ((string)statusLabel.Content != "ERROR" && (string)statusLabel.Content != "NORMAL")
+            {
+                titleLabel.Content = "It is ON!";
+            }
         }
     }
 }

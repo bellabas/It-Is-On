@@ -1,4 +1,5 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+﻿using ItIsOn.Logic;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
@@ -14,12 +15,11 @@ namespace ItIsOn.ViewModel
 {
     public class MainWindowViewModel : ObservableRecipient
     {
-        public string SelectedMode { get; private set; }
         public string Status { get; private set; }
 
         public ICommand PreventScreensaverAndSleepCommand { get; set; }
         public ICommand PreventSleepCommand { get; set; }
-
+        public ICommand SetNormalModeCommand { get; set; }
 
         public static bool IsInDesignMode
         {
@@ -42,9 +42,7 @@ namespace ItIsOn.ViewModel
             PreventScreensaverAndSleepCommand = new RelayCommand(
             () =>
             {
-                threadExecutionStateLogic.PreventScreensaverAndSleep();
-                SelectedMode = "prevent SCREENSAVER and SLEEP";
-                OnPropertyChanged(nameof(SelectedMode));
+                threadExecutionStateLogic.SetMode(ModeOptions.PreventScreensaverAndSleep);
             }
             );
 
@@ -52,9 +50,14 @@ namespace ItIsOn.ViewModel
             PreventSleepCommand = new RelayCommand(
             () =>
             {
-                threadExecutionStateLogic.PreventSleep();
-                SelectedMode = "prevent SLEEP";
-                OnPropertyChanged(nameof(SelectedMode));
+                threadExecutionStateLogic.SetMode(ModeOptions.PreventSleep);
+            }
+            );
+
+            SetNormalModeCommand = new RelayCommand(
+            () =>
+            {
+                threadExecutionStateLogic.SetMode(ModeOptions.Normal);
             }
             );
 

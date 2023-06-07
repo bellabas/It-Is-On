@@ -38,22 +38,17 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0" x:Name="MainMenu" HorizontalAlignment="Center" Visibility="Hidden">
-            <Label Content="It is OFF!" HorizontalAlignment="Center" FontSize="25" Foreground="Tomato" FontWeight="Heavy"/>
-            <Label Content="modes:" FontSize="18"/>
-            <Button Content="prevent SCREENSAVER and SLEEP" Command="{Binding PreventScreensaverAndSleepCommand}"/>
-            <Button Content="prevent SLEEP" Command="{Binding PreventSleepCommand}"/>
-        </StackPanel>
-        <StackPanel Grid.Row="0" x:Name="ModeSelectedMenu" HorizontalAlignment="Center" Visibility="Visible">
-            <Label Content="It is ON!" HorizontalAlignment="Center" FontSize="25" Foreground="ForestGreen" FontWeight="Heavy"/>
-            <Label Content="selected mode:"  FontSize="18"/>
-            <Label Content="{Binding SelectedMode}" />
+
+        <StackPanel Grid.Row="0" x:Name="MainMenu" HorizontalAlignment="Center">
+            <Label x:Name="titleLabel" Content="It is OFF!" HorizontalAlignment="Center" FontSize="25" Foreground="Tomato" FontWeight="Heavy"/>
+            <Label Content="prevent modes:" FontSize="18"/>
+            <Button Content="SCREENSAVER and SLEEP" Click="ScreensaverAndSleep_Click" />
+            <Button Content="SLEEP" Click="Sleep_Click" Margin="5 5 5 20"/>
+            <Button Content="NORMAL mode" Click="NormalMode_Click"/>
             <WrapPanel>
-                <Label Content="status: "/>
-                <Label Content="{Binding Status}"/>
+                <Label Content="status:"/>
+                <Label x:Name="statusLabel" Content="{Binding Status}"/>
             </WrapPanel>
-            <Button Content="&lt; Back"/>
         </StackPanel>
     </Grid>
 </Window>
