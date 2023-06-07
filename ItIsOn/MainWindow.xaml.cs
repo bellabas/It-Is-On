@@ -1,6 +1,7 @@
 ﻿using ItIsOn.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,20 @@ namespace ItIsOn
     /// </summary>
     public partial class MainWindow : Window
     {
+        private System.Windows.Forms.NotifyIcon myNotifyIcon;
+        private WindowState myStoredWindowState;
         public MainWindow()
         {
             InitializeComponent();
+
+            myStoredWindowState = WindowState.Normal;
+
+            myNotifyIcon = new System.Windows.Forms.NotifyIcon();
+            myNotifyIcon.BalloonTipTitle = "Minimized";
+            myNotifyIcon.BalloonTipText = "Click the tray icon to show!";
+            myNotifyIcon.Text = "It Is ON! App";
+            myNotifyIcon.Icon = new System.Drawing.Icon("appicon.ico");
+            myNotifyIcon.Click += new EventHandler(m_notifyIcon_Click);
         }
 
         private void ScreensaverAndSleep_Click(object sender, RoutedEventArgs e)
@@ -68,9 +80,50 @@ namespace ItIsOn
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             (DataContext as MainWindowViewModel).SetNormalModeCommand.Execute(null);
+
+            myNotifyIcon.Dispose();
+            myNotifyIcon = null;
+        }
+
+        void OnStateChanged(object sender, EventArgs args)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                Hide();
+                if (myNotifyIcon != null)
+                {
+                    myNotifyIcon.ShowBalloonTip(2000);
+                }
+            }
+            else
+            {
+                myStoredWindowState = WindowState;
+            }
+        }
+        void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs args)
+        {
+            CheckTrayIcon();
+        }
+
+        void m_notifyIcon_Click(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = myStoredWindowState;
+        }
+        void CheckTrayIcon()
+        {
+            ShowTrayIcon(!IsVisible);
+        }
+
+        void ShowTrayIcon(bool show)
+        {
+            if (myNotifyIcon != null)
+            {
+                myNotifyIcon.Visible = show;
+            }
         }
 
     }

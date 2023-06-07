@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ItIsOn"
         xmlns:vms="clr-namespace:ItIsOn.ViewModel"
         mc:Ignorable="d"
-        Title="It is ON App" Height="300" Width="500" Closing="Window_Closing">
+        Title="It is ON! App" Height="300" Width="500" Closing="Window_Closing" StateChanged="OnStateChanged" IsVisibleChanged="OnIsVisibleChanged">
     <Window.DataContext>
         <vms:MainWindowViewModel/>
     </Window.DataContext>
