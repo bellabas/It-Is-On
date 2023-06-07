@@ -67,6 +67,7 @@ namespace ItIsOn.ViewModel
                 OnPropertyChanged(nameof(Status));
             });
 
+            Status = "NORMAL";
         }
 
 

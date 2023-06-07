@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ItIsOn"
         xmlns:vms="clr-namespace:ItIsOn.ViewModel"
         mc:Ignorable="d"
-        Title="It is ON App" Height="450" Width="800">
+        Title="It is ON App" Height="300" Width="500" Closing="Window_Closing">
     <Window.DataContext>
         <vms:MainWindowViewModel/>
     </Window.DataContext>
@@ -14,11 +14,11 @@
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="Arial"/>
-            <Setter Property="Margin" Value="5" />
+            <Setter Property="Margin" Value="15 5 15 5" />
         </Style>
         
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="5" />
+            <Setter Property="Margin" Value="60 5 60 5" />
             <Setter Property="Padding" Value="5" />
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
@@ -34,20 +34,20 @@
         </Style>
     </Window.Resources>
     
-    <Grid Background="LightGray">
+    <Grid Background="LightGray" >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" x:Name="MainMenu" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" x:Name="MainMenu">
             <Label x:Name="titleLabel" Content="It is OFF!" HorizontalAlignment="Center" FontSize="25" Foreground="Tomato" FontWeight="Heavy"/>
             <Label Content="prevent modes:" FontSize="18"/>
             <Button Content="SCREENSAVER and SLEEP" Click="ScreensaverAndSleep_Click" />
-            <Button Content="SLEEP" Click="Sleep_Click" Margin="5 5 5 20"/>
+            <Button Content="SLEEP" Click="Sleep_Click" Margin="60 5 60 20"/>
             <Button Content="NORMAL mode" Click="NormalMode_Click"/>
             <WrapPanel>
                 <Label Content="status:"/>
-                <Label x:Name="statusLabel" Content="{Binding Status}"/>
+                <Label x:Name="statusLabel" Content="{Binding Status}" SourceUpdated="statusLabel_SourceUpdated"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

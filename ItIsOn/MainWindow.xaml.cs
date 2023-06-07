@@ -29,27 +29,49 @@ namespace ItIsOn
         private void ScreensaverAndSleep_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as MainWindowViewModel).PreventScreensaverAndSleepCommand.Execute(null);
-            SetTitleLabel();
         }
 
         private void Sleep_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as MainWindowViewModel).PreventSleepCommand.Execute(null);
-            SetTitleLabel();
         }
 
         private void NormalMode_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as MainWindowViewModel).SetNormalModeCommand.Execute(null);
-            SetTitleLabel();
         }
 
-        private void SetTitleLabel()
+        private void statusLabel_SourceUpdated(object sender, DataTransferEventArgs e)
         {
-            if ((string)statusLabel.Content != "ERROR" && (string)statusLabel.Content != "NORMAL")
+            if ((string)statusLabel.Content == "ERROR" || (string)statusLabel.Content == "NORMAL")
+            {
+                titleLabel.Content = "It is OFF!";
+                titleLabel.Foreground = Brushes.Tomato;
+            }
+            else
             {
                 titleLabel.Content = "It is ON!";
+                titleLabel.Foreground = Brushes.ForestGreen;
+            }
+
+            if ((string)statusLabel.Content == "NORMAL")
+            {
+                statusLabel.Foreground = Brushes.Orange;
+            }
+            else if ((string)statusLabel.Content == "ERROR")
+            {
+                statusLabel.Foreground = Brushes.Red;
+            }
+            else
+            {
+                statusLabel.Foreground = Brushes.ForestGreen;
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            (DataContext as MainWindowViewModel).SetNormalModeCommand.Execute(null);
+        }
+
     }
 }
