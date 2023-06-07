@@ -47,7 +47,7 @@
             <Button Content="NORMAL mode" Click="NormalMode_Click"/>
             <WrapPanel>
                 <Label Content="status:"/>
-                <Label x:Name="statusLabel" Content="{Binding Status}" SourceUpdated="statusLabel_SourceUpdated"/>
+                <Label x:Name="statusLabel" Content="{Binding Status}" SizeChanged="StatusLabel_SizeChanged"/>
             </WrapPanel>
         </StackPanel>
     </Grid>

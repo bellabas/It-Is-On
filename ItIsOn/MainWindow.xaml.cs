@@ -41,7 +41,7 @@ namespace ItIsOn
             (DataContext as MainWindowViewModel).SetNormalModeCommand.Execute(null);
         }
 
-        private void statusLabel_SourceUpdated(object sender, DataTransferEventArgs e)
+        private void StatusLabel_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if ((string)statusLabel.Content == "ERROR" || (string)statusLabel.Content == "NORMAL")
             {
