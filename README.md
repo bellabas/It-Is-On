@@ -1,4 +1,5 @@
 ![It is ON!](ItIsOn/appicon.ico)
+
 Prevents the computer from going to sleep. The app was developed with WPF and WinForms in the MVVM pattern, and it uses IoC container.
 
 ## Usage:
