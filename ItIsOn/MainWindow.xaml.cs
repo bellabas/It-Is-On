@@ -35,7 +35,7 @@ namespace ItIsOn
             myNotifyIcon.BalloonTipText = "Click the tray icon to show!";
             myNotifyIcon.Text = "It Is ON! App";
             myNotifyIcon.Icon = new System.Drawing.Icon("appicon.ico");
-            myNotifyIcon.Click += new EventHandler(m_notifyIcon_Click);
+            myNotifyIcon.Click += new EventHandler(MyNotifyIcon_Click);
         }
 
         private void ScreensaverAndSleep_Click(object sender, RoutedEventArgs e)
@@ -88,7 +88,7 @@ namespace ItIsOn
             myNotifyIcon = null;
         }
 
-        void OnStateChanged(object sender, EventArgs args)
+        private void OnStateChanged(object sender, EventArgs args)
         {
             if (WindowState == WindowState.Minimized)
             {
@@ -103,22 +103,22 @@ namespace ItIsOn
                 myStoredWindowState = WindowState;
             }
         }
-        void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs args)
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
             CheckTrayIcon();
         }
 
-        void m_notifyIcon_Click(object sender, EventArgs e)
+        private void MyNotifyIcon_Click(object sender, EventArgs e)
         {
             Show();
             WindowState = myStoredWindowState;
         }
-        void CheckTrayIcon()
+        private void CheckTrayIcon()
         {
             ShowTrayIcon(!IsVisible);
         }
 
-        void ShowTrayIcon(bool show)
+        private void ShowTrayIcon(bool show)
         {
             if (myNotifyIcon != null)
             {
