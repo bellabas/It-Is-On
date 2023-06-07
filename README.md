@@ -16,4 +16,4 @@ Three selectable modes are available:
 * [.NET 5 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/5.0)
 
 ## How it works:
-It calls a WinApi method that sets the appropriate flags.
+It calls a WinAPI function that sets the appropriate flags which prevents the computer from sleeping or turning off the screen.
